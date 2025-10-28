@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_product_variants",
+  "info": {
+    "displayName": "Variant",
+    "description": "Product variants (color, size, etc.)"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["color", "size", "material", "style"],
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "colorCode": {
+      "type": "string"
+    },
+    "priceModifier": {
+      "type": "decimal",
+      "default": 0
+    },
+    "stockModifier": {
+      "type": "integer",
+      "default": 0
+    },
+    "isAvailable": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

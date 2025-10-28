@@ -1,0 +1,11 @@
+# Ignore frontend files
+../postcss.config.mjs
+../tailwind.config.ts
+../next.config.ts
+../tsconfig.json
+../app/
+../lib/
+../public/
+../scripts/
+../.next/
+../node_modules/
