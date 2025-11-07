@@ -4,68 +4,143 @@
   "info": {
     "singularName": "banner",
     "pluralName": "banners",
-    "displayName": "Banner",
+    "displayName": "Bannerr",
     "description": "Homepage and category banners"
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "required": true
     },
     "subtitle": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "buttonText": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "buttonLink": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "image": {
       "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "backgroundImage": {
       "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "backgroundColor": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "default": "#ffffff"
     },
     "textColor": {
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "default": "#000000"
     },
     "position": {
       "type": "enumeration",
-      "enum": ["homepage-main", "homepage-secondary", "category-banner", "promotional"],
-      "required": true
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "enum": [
+        "homepage-main",
+        "homepage-secondary",
+        "category-banner",
+        "promotional"
+      ]
     },
     "isActive": {
       "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "default": true
     },
     "sortOrder": {
       "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "default": 0
     },
     "startDate": {
-      "type": "datetime"
-    },
-    "endDate": {
-      "type": "datetime"
+      "type": "datetime",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "targetCategory": {
       "type": "relation",
@@ -73,10 +148,38 @@
       "target": "api::category.category"
     },
     "discount": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "brand": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "category_new": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category-new.category-new",
+      "inversedBy": "sub_categories"
+    },
+    "category_news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category-new.category-new",
+      "mappedBy": "products"
+    },
+    "product_news": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-new.product-new",
+      "mappedBy": "categories"
     }
   }
 }

@@ -38,6 +38,18 @@
     "isActive": {
       "type": "boolean",
       "default": true
+    },
+    "category_news": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category-new.category-new",
+      "mappedBy": "parentCategory"
+    },
+    "product_news": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-new.product-new",
+      "mappedBy": "brand"
     }
   }
 }
