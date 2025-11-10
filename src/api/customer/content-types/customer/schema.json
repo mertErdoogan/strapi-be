@@ -1,0 +1,22 @@
+{
+    "kind": "collectionType",
+    "collectionName": "customers",
+    "info": { "singularName": "customer", "pluralName": "customers", "displayName": "Customer" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "user": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "plugin::users-permissions.user"
+      },
+      "firstName": { "type": "string", "required": true },
+      "lastName": { "type": "string", "required": true },
+      "email": { "type": "email", "required": true, "unique": true },
+      "phone": { "type": "string" },
+      "defaultBillingAddress": { "type": "component", "component": "common.address" },
+      "defaultShippingAddress": { "type": "component", "component": "common.address" },
+      "loyaltyPoints": { "type": "integer", "default": 0 },
+      "marketingOptIn": { "type": "boolean", "default": false }
+    }
+  }
+  

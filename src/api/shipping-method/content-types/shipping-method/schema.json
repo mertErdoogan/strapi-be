@@ -1,0 +1,21 @@
+{
+    "kind": "collectionType",
+    "collectionName": "shipping_methods",
+    "info": { "singularName": "shipping-method", "pluralName": "shipping-methods", "displayName": "Shipping Method" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "name": { "type": "string", "required": true },
+      "zone": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::shipping-zone.shipping-zone",
+        "required": true
+      },
+      "pricingRules": { "type": "json" },
+      "carrier": { "type": "string" },
+      "etaMin": { "type": "integer" },
+      "etaMax": { "type": "integer" },
+      "isActive": { "type": "boolean", "default": true }
+    }
+  }
+  

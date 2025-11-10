@@ -1,0 +1,30 @@
+{
+    "kind": "collectionType",
+    "collectionName": "orders",
+    "info": { "singularName": "order", "pluralName": "orders", "displayName": "Order" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "orderNumber": { "type": "string", "unique": true, "required": true },
+      "customer": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::customer.customer"
+      },
+      "email": { "type": "email", "required": true },
+      "billingAddress": { "type": "component", "component": "common.address", "required": true },
+      "shippingAddress": { "type": "component", "component": "common.address", "required": true },
+      "items": { "type": "component", "repeatable": true, "component": "order.order-item", "required": true },
+      "currency": { "type": "string", "default": "USD" },
+      "subtotal": { "type": "decimal", "required": true },
+      "tax": { "type": "decimal", "default": 0 },
+      "discount": { "type": "decimal", "default": 0 },
+      "shipping": { "type": "decimal", "default": 0 },
+      "grandTotal": { "type": "decimal", "required": true },
+      "status": { "type": "enumeration", "enum": ["new","paid","fulfilled","cancelled","refunded"], "default": "new" },
+      "paymentStatus": { "type": "enumeration", "enum": ["pending","authorized","paid","failed","refunded"], "default": "pending" },
+      "shippingStatus": { "type": "enumeration", "enum": ["pending","packed","in_transit","delivered","returned"], "default": "pending" },
+      "couponCode": { "type": "string" },
+      "placedAt": { "type": "datetime" }
+    }
+  }
+  

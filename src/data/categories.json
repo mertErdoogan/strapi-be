@@ -1,0 +1,17 @@
+{
+    "categories": [
+      { "name": "Electronics", "description": "Phones, computers, TVs and more.", "sortOrder": 10, "isActive": true },
+      { "name": "Computers & Tablets", "parent": "Electronics", "description": "Laptops, desktops, tablets.", "sortOrder": 11, "isActive": true },
+      { "name": "Phones & Accessories", "parent": "Electronics", "description": "Smartphones, cases, chargers.", "sortOrder": 12, "isActive": true },
+      { "name": "TV & Audio", "parent": "Electronics", "description": "Televisions, soundbars, speakers.", "sortOrder": 13, "isActive": true },
+  
+      { "name": "Home & Kitchen", "description": "Everything for home life.", "sortOrder": 20, "isActive": true },
+      { "name": "Appliances", "parent": "Home & Kitchen", "description": "Large and small appliances.", "sortOrder": 21, "isActive": true },
+      { "name": "Furniture & Decor", "parent": "Home & Kitchen", "description": "Sofas, tables, lighting, decor.", "sortOrder": 22, "isActive": true },
+  
+      { "name": "Fashion", "description": "Clothing and accessories.", "sortOrder": 30, "isActive": true },
+      { "name": "Men's Clothing", "parent": "Fashion", "description": "Men’s apparel and accessories.", "sortOrder": 31, "isActive": true },
+      { "name": "Women's Clothing", "parent": "Fashion", "description": "Women’s apparel and accessories.", "sortOrder": 32, "isActive": true }
+    ]
+  }
+  

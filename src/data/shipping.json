@@ -1,0 +1,12 @@
+{
+    "zones": [
+      { "name": "TR - Domestic", "countries": ["TR"] },
+      { "name": "EU", "countries": ["DE","FR","NL","IT","ES"] }
+    ],
+    "methods": [
+      { "name": "Standard Kargo", "zone": "TR - Domestic", "carrier": "Yurtiçi", "etaMin": 2, "etaMax": 4, "pricingRules": { "type":"flat", "price": 39.9 } },
+      { "name": "Hızlı Kargo",    "zone": "TR - Domestic", "carrier": "MNG",    "etaMin": 1, "etaMax": 2, "pricingRules": { "type":"flat", "price": 79.9 } },
+      { "name": "EU Standard",    "zone": "EU",            "carrier": "DHL",    "etaMin": 4, "etaMax": 7, "pricingRules": { "type":"weight", "brackets":[{"maxKg":1,"price":12},{"maxKg":5,"price":25},{"maxKg":10,"price":40}] } }
+    ]
+  }
+  

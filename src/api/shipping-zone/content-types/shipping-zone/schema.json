@@ -1,0 +1,12 @@
+{
+    "kind": "collectionType",
+    "collectionName": "shipping_zones",
+    "info": { "singularName": "shipping-zone", "pluralName": "shipping-zones", "displayName": "Shipping Zone" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "name": { "type": "string", "required": true, "unique": true },
+      "countries": { "type": "json" },
+      "states": { "type": "json" }
+    }
+  }
+  

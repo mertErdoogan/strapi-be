@@ -1,0 +1,48 @@
+{
+    "kind": "collectionType",
+    "collectionName": "discounts",
+    "info": {
+        "singularName": "discount",
+        "pluralName": "discounts",
+        "displayName": "Discount"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "unique": true
+        },
+        "type": {
+            "type": "enumeration",
+            "enum": [
+                "percent",
+                "fixed",
+                "bogo"
+            ],
+            "required": true
+        },
+        "amount": {
+            "type": "decimal",
+            "required": true
+        },
+        "conditions": {
+            "type": "json"
+        },
+        "startsAt": {
+            "type": "datetime"
+        },
+        "endsAt": {
+            "type": "datetime"
+        },
+        "usageLimit": {
+            "type": "integer"
+        },
+        "isActive": {
+            "type": "boolean",
+            "default": true
+        }
+    }
+}

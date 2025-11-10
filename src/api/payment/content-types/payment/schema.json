@@ -1,0 +1,22 @@
+{
+    "kind": "collectionType",
+    "collectionName": "payments",
+    "info": { "singularName": "payment", "pluralName": "payments", "displayName": "Payment" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "order": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::order.order",
+        "required": true
+      },
+      "provider": { "type": "enumeration", "enum": ["iyzico","stripe","paypal","cod"], "required": true },
+      "amount": { "type": "decimal", "required": true },
+      "currency": { "type": "string", "default": "USD" },
+      "status": { "type": "enumeration", "enum": ["created","authorized","paid","failed","refunded"], "default": "created" },
+      "transactionId": { "type": "string" },
+      "payload": { "type": "json" },
+      "processedAt": { "type": "datetime" }
+    }
+  }
+  

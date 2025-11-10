@@ -1,0 +1,7 @@
+{
+    "rules": [
+      { "name": "TR KDV", "country": "TR", "rate": 0.20, "inclusive": true },
+      { "name": "EU VAT", "country": "DE", "rate": 0.19, "inclusive": true }
+    ]
+  }
+  

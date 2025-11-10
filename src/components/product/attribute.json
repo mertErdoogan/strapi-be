@@ -1,0 +1,9 @@
+{
+    "collectionName": "components_product_attribute",
+    "info": { "displayName": "Attribute" },
+    "attributes": {
+      "key": { "type": "string", "required": true },
+      "value": { "type": "string", "required": true }
+    }
+  }
+  

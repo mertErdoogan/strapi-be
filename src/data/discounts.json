@@ -1,0 +1,11 @@
+{
+    "discounts": [
+      { "name": "WELCOME10", "type": "percent", "amount": 10, "isActive": true },
+      { "name": "SAVE50", "type": "fixed", "amount": 50, "isActive": true }
+    ],
+    "coupons": [
+      { "code": "WELCOME10", "discount": "WELCOME10", "maxUse": 1000, "perUserLimit": 1 },
+      { "code": "SAVE50-2025", "discount": "SAVE50", "maxUse": 500 }
+    ]
+  }
+  

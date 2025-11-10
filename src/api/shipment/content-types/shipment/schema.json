@@ -1,0 +1,23 @@
+{
+    "kind": "collectionType",
+    "collectionName": "shipments",
+    "info": { "singularName": "shipment", "pluralName": "shipments", "displayName": "Shipment" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "order": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::order.order",
+        "required": true
+      },
+      "provider": { "type": "string" },
+      "trackingNumber": { "type": "string" },
+      "trackingUrl": { "type": "string" },
+      "items": { "type": "json" },
+      "status": { "type": "enumeration", "enum": ["created","label_printed","in_transit","delivered","returned"], "default": "created" },
+      "labelUrl": { "type": "string" },
+      "shippedAt": { "type": "datetime" },
+      "deliveredAt": { "type": "datetime" }
+    }
+  }
+  

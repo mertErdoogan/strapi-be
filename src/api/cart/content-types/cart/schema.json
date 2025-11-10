@@ -1,0 +1,23 @@
+{
+    "kind": "collectionType",
+    "collectionName": "carts",
+    "info": { "singularName": "cart", "pluralName": "carts", "displayName": "Cart" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "customer": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::customer.customer"
+      },
+      "items": { "type": "component", "repeatable": true, "component": "cart.cart-item" },
+      "currency": { "type": "string", "default": "USD" },
+      "couponCode": { "type": "string" },
+      "subtotal": { "type": "decimal", "default": 0 },
+      "tax": { "type": "decimal", "default": 0 },
+      "discount": { "type": "decimal", "default": 0 },
+      "shipping": { "type": "decimal", "default": 0 },
+      "grandTotal": { "type": "decimal", "default": 0 },
+      "expiresAt": { "type": "datetime" }
+    }
+  }
+  

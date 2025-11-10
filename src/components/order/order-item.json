@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_order_order_item",
+    "info": { "displayName": "Order Item" },
+    "attributes": {
+      "productId": { "type": "integer", "required": true },
+      "title": { "type": "string", "required": true },
+      "sku": { "type": "string" },
+      "variantOptions": { "type": "json" },
+      "qty": { "type": "integer", "default": 1 },
+      "unitPrice": { "type": "decimal", "required": true },
+      "taxRate": { "type": "decimal" },
+      "discount": { "type": "decimal" },
+      "lineTotal": { "type": "decimal", "required": true }
+    }
+  }
+  

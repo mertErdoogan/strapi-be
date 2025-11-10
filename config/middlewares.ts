@@ -1,14 +1,15 @@
 export default [
   'strapi::logger',
   'strapi::errors',
+  
   'strapi::security',
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
-      headers: '*',
-      origin: ['http://localhost:3000', 'http://localhost:1337', 'https://your-domain.com']
-    }
+      origin: ['http://localhost:3000'], // gerekiyorsa domain(ler)inizi ekleyin
+      headers: ['Content-Type', 'Authorization'],
+      methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+    },
   },
   'strapi::poweredBy',
   'strapi::query',

@@ -1,0 +1,698 @@
+{
+    "products": [
+        {
+            "title": "14\" Ultrabook Laptop",
+            "shortDescription": "Lightweight laptop for business and travel.",
+            "description": "14 inch ultrabook, 16GB RAM, 512GB SSD, Wi-Fi 6.",
+            "price": 1199.99,
+            "salePrice": 1099.99,
+            "currency": "USD",
+            "sku": "NB-ULTRA-14",
+            "stockQty": 25,
+            "categories": [
+                "Computers & Tablets",
+                "Electronics"
+            ],
+            "brand": "TechPro",
+            "tags": [
+                "laptop",
+                "ultrabook",
+                "office"
+            ],
+            "attributes": [
+                {
+                    "key": "CPU",
+                    "value": "Intel i7"
+                },
+                {
+                    "key": "RAM",
+                    "value": "16GB"
+                },
+                {
+                    "key": "Storage",
+                    "value": "512GB SSD"
+                }
+            ],
+            "rating": 4.7,
+            "reviewCount": 182
+        },
+        {
+            "title": "Gaming Laptop 15.6\"",
+            "shortDescription": "High performance gaming notebook.",
+            "description": "RTX GPU, 32GB RAM, 1TB SSD.",
+            "price": 1799.99,
+            "currency": "USD",
+            "sku": "NB-GAME-156",
+            "stockQty": 12,
+            "categories": [
+                "Computers & Tablets",
+                "Electronics"
+            ],
+            "brand": "GameX",
+            "tags": [
+                "gaming",
+                "laptop",
+                "performance"
+            ],
+            "attributes": [
+                {
+                    "key": "GPU",
+                    "value": "RTX 4070"
+                },
+                {
+                    "key": "RAM",
+                    "value": "32GB"
+                }
+            ],
+            "rating": 4.8,
+            "reviewCount": 96
+        },
+        {
+            "title": "10.2\" Tablet Wi-Fi",
+            "shortDescription": "Bright display, long battery.",
+            "description": "10.2 inch tablet for study and fun.",
+            "price": 329,
+            "currency": "USD",
+            "sku": "TAB-102-WF",
+            "stockQty": 80,
+            "categories": [
+                "Computers & Tablets",
+                "Electronics"
+            ],
+            "brand": "Tabio",
+            "tags": [
+                "tablet"
+            ],
+            "rating": 4.5,
+            "reviewCount": 73
+        },
+        {
+            "title": "Android Smartphone 6.7\"",
+            "shortDescription": "AMOLED display, 5G.",
+            "description": "Flagship camera, fast charge.",
+            "price": 799,
+            "salePrice": 749,
+            "currency": "USD",
+            "sku": "PH-AND-67",
+            "stockQty": 50,
+            "categories": [
+                "Phones & Accessories",
+                "Electronics"
+            ],
+            "brand": "SmartOne",
+            "tags": [
+                "phone",
+                "android",
+                "5g"
+            ],
+            "variants": [
+                {
+                    "sku": "PH-AND-67-128",
+                    "options": {
+                        "storage": "128GB",
+                        "color": "Black"
+                    },
+                    "price": 799,
+                    "salePrice": 749,
+                    "stockQty": 30
+                },
+                {
+                    "sku": "PH-AND-67-256",
+                    "options": {
+                        "storage": "256GB",
+                        "color": "Blue"
+                    },
+                    "price": 899,
+                    "stockQty": 20
+                }
+            ],
+            "rating": 4.6,
+            "reviewCount": 210
+        },
+        {
+            "title": "iOS Smartphone 6.1\"",
+            "shortDescription": "Powerful chip, great cameras.",
+            "description": "Smooth OS, long updates.",
+            "price": 899,
+            "currency": "USD",
+            "sku": "PH-IOS-61",
+            "stockQty": 40,
+            "categories": [
+                "Phones & Accessories",
+                "Electronics"
+            ],
+            "brand": "Pear",
+            "tags": [
+                "phone",
+                "ios"
+            ],
+            "variants": [
+                {
+                    "sku": "PH-IOS-61-128",
+                    "options": {
+                        "storage": "128GB",
+                        "color": "Silver"
+                    },
+                    "price": 899,
+                    "stockQty": 15
+                },
+                {
+                    "sku": "PH-IOS-61-256",
+                    "options": {
+                        "storage": "256GB",
+                        "color": "Midnight"
+                    },
+                    "price": 999,
+                    "stockQty": 25
+                }
+            ],
+            "rating": 4.8,
+            "reviewCount": 154
+        },
+        {
+            "title": "MagSafe Wireless Charger",
+            "shortDescription": "Fast charge, magnetic.",
+            "description": "Snap-on charging.",
+            "price": 39,
+            "currency": "USD",
+            "sku": "PH-MAGSAFE-CH",
+            "stockQty": 200,
+            "categories": [
+                "Phones & Accessories",
+                "Electronics"
+            ],
+            "brand": "SmartOne",
+            "tags": [
+                "charger",
+                "wireless"
+            ],
+            "rating": 4.6,
+            "reviewCount": 312
+        },
+        {
+            "title": "Silicone Phone Case",
+            "shortDescription": "Shockproof protective case.",
+            "description": "Protects from drops",
+            "price": 15,
+            "currency": "USD",
+            "sku": "PH-CASE-SIL",
+            "stockQty": 500,
+            "categories": [
+                "Phones & Accessories"
+            ],
+            "brand": "Protecto",
+            "tags": [
+                "accessory"
+            ],
+            "variants": [
+                {
+                    "sku": "PH-CASE-SIL-BLK",
+                    "options": {
+                        "color": "Black"
+                    },
+                    "price": 15,
+                    "stockQty": 200
+                },
+                {
+                    "sku": "PH-CASE-SIL-CLR",
+                    "options": {
+                        "color": "Clear"
+                    },
+                    "price": 15,
+                    "stockQty": 300
+                }
+            ],
+            "rating": 4.4,
+            "reviewCount": 67
+        },
+        {
+            "title": "55\" 4K Smart TV",
+            "shortDescription": "4K UHD, HDR10.",
+            "description": "Great for movies and gaming.",
+            "price": 699,
+            "currency": "USD",
+            "sku": "TV-55-4K-SMART",
+            "stockQty": 18,
+            "categories": [
+                "TV & Audio",
+                "Electronics"
+            ],
+            "brand": "VisionX",
+            "tags": [
+                "tv",
+                "4k",
+                "smart"
+            ],
+            "rating": 4.7,
+            "reviewCount": 129
+        },
+        {
+            "title": "65\" OLED TV",
+            "shortDescription": "Perfect blacks, rich colors.",
+            "description": "Cinematic experience.",
+            "price": 1599,
+            "currency": "USD",
+            "sku": "TV-65-OLED",
+            "stockQty": 10,
+            "categories": [
+                "TV & Audio",
+                "Electronics"
+            ],
+            "brand": "VisionX",
+            "tags": [
+                "tv",
+                "oled"
+            ],
+            "rating": 4.9,
+            "reviewCount": 58
+        },
+        {
+            "title": "Bluetooth Soundbar 2.1",
+            "shortDescription": "Deep bass, clear voice.",
+            "description": "Enhance your TV sound.",
+            "price": 149,
+            "currency": "USD",
+            "sku": "AUD-SOUNDBAR",
+            "stockQty": 30,
+            "categories": [
+                "TV & Audio",
+                "Electronics"
+            ],
+            "brand": "Soundly",
+            "tags": [
+                "soundbar",
+                "audio"
+            ],
+            "rating": 4.5,
+            "reviewCount": 84
+        },
+        {
+            "title": "Robot Vacuum Cleaner",
+            "shortDescription": "Smart mapping, app control.",
+            "description": "Keeps your floors clean.",
+            "price": 349,
+            "currency": "USD",
+            "sku": "HK-ROBO-VC",
+            "stockQty": 35,
+            "categories": [
+                "Home & Kitchen",
+                "Appliances"
+            ],
+            "brand": "CleanHome",
+            "tags": [
+                "robot",
+                "vacuum",
+                "smart"
+            ],
+            "rating": 4.6,
+            "reviewCount": 196
+        },
+        {
+            "title": "Air Fryer XL 5.5L",
+            "shortDescription": "Low oil, digital display.",
+            "description": "Healthier cooking.",
+            "price": 129,
+            "currency": "USD",
+            "sku": "HK-AIRFRY-XL",
+            "stockQty": 60,
+            "categories": [
+                "Home & Kitchen",
+                "Appliances"
+            ],
+            "brand": "Kitchen+",
+            "tags": [
+                "airfryer",
+                "kitchen"
+            ],
+            "rating": 4.7,
+            "reviewCount": 402,
+            "isFeatured": true
+        },
+        {
+            "title": "Espresso Coffee Machine",
+            "shortDescription": "15 bar, milk frother.",
+            "description": "Cafe-style coffee.",
+            "price": 179,
+            "currency": "USD",
+            "sku": "HK-COFFEE-ESP",
+            "stockQty": 27,
+            "categories": [
+                "Home & Kitchen",
+                "Appliances"
+            ],
+            "brand": "Caffetto",
+            "tags": [
+                "coffee",
+                "espresso"
+            ],
+            "rating": 4.5,
+            "reviewCount": 143
+        },
+        {
+            "title": "High-Speed Blender",
+            "shortDescription": "Smoothies, sauces, ice crush.",
+            "description": "1200W powerful motor.",
+            "price": 89,
+            "currency": "USD",
+            "sku": "HK-BLEND-1200",
+            "stockQty": 70,
+            "categories": [
+                "Home & Kitchen",
+                "Appliances"
+            ],
+            "brand": "Kitchen+",
+            "tags": [
+                "blender"
+            ],
+            "rating": 4.4,
+            "reviewCount": 61
+        },
+        {
+            "title": "Modern Sofa 3-Seater",
+            "shortDescription": "Fabric, modern style.",
+            "description": "Comfortable living room sofa.",
+            "price": 499,
+            "currency": "USD",
+            "sku": "FD-SOFA-3S",
+            "stockQty": 8,
+            "categories": [
+                "Furniture & Decor",
+                "Home & Kitchen"
+            ],
+            "brand": "HomeDeco",
+            "tags": [
+                "sofa",
+                "livingroom"
+            ],
+            "variants": [
+                {
+                    "sku": "FD-SOFA-3S-GRY",
+                    "options": {
+                        "color": "Gray"
+                    },
+                    "price": 499,
+                    "stockQty": 3
+                },
+                {
+                    "sku": "FD-SOFA-3S-BLU",
+                    "options": {
+                        "color": "Navy"
+                    },
+                    "price": 499,
+                    "stockQty": 5
+                }
+            ],
+            "rating": 4.3,
+            "reviewCount": 27
+        },
+        {
+            "title": "LED Floor Lamp",
+            "shortDescription": "Adjustable, warm light.",
+            "description": "Perfect for reading corners.",
+            "price": 59,
+            "currency": "USD",
+            "sku": "FD-LAMP-LED",
+            "stockQty": 45,
+            "categories": [
+                "Furniture & Decor",
+                "Home & Kitchen"
+            ],
+            "brand": "LightWave",
+            "tags": [
+                "lamp",
+                "lighting"
+            ],
+            "rating": 4.6,
+            "reviewCount": 90
+        },
+        {
+            "title": "Oak Coffee Table",
+            "shortDescription": "Sturdy wood table.",
+            "description": "Minimalist design.",
+            "price": 139,
+            "currency": "USD",
+            "sku": "FD-TABLE-COFFEE",
+            "stockQty": 22,
+            "categories": [
+                "Furniture & Decor",
+                "Home & Kitchen"
+            ],
+            "brand": "HomeDeco",
+            "tags": [
+                "table",
+                "coffee"
+            ],
+            "rating": 4.5,
+            "reviewCount": 35
+        },
+        {
+            "title": "Patterned Area Rug 160x230",
+            "shortDescription": "Soft touch, easy clean.",
+            "description": "Adds warmth to rooms.",
+            "price": 129,
+            "currency": "USD",
+            "sku": "FD-RUG-160",
+            "stockQty": 33,
+            "categories": [
+                "Furniture & Decor",
+                "Home & Kitchen"
+            ],
+            "brand": "HomeDeco",
+            "tags": [
+                "rug"
+            ],
+            "rating": 4.6,
+            "reviewCount": 47
+        },
+        {
+            "title": "Men's Slim Fit Shirt",
+            "shortDescription": "Cotton, breathable.",
+            "description": "Office & casual.",
+            "price": 39.9,
+            "currency": "USD",
+            "sku": "M-SHIRT-SLIM",
+            "stockQty": 150,
+            "categories": [
+                "Men's Clothing",
+                "Fashion"
+            ],
+            "brand": "UrbanWear",
+            "tags": [
+                "men",
+                "shirt"
+            ],
+            "variants": [
+                {
+                    "sku": "M-SHIRT-SLIM-BLK-S",
+                    "options": {
+                        "color": "Black",
+                        "size": "S"
+                    },
+                    "price": 39.9,
+                    "stockQty": 15
+                },
+                {
+                    "sku": "M-SHIRT-SLIM-BLK-M",
+                    "options": {
+                        "color": "Black",
+                        "size": "M"
+                    },
+                    "price": 39.9,
+                    "stockQty": 40
+                },
+                {
+                    "sku": "M-SHIRT-SLIM-BLK-L",
+                    "options": {
+                        "color": "Black",
+                        "size": "L"
+                    },
+                    "price": 39.9,
+                    "stockQty": 50
+                }
+            ],
+            "rating": 4.4,
+            "reviewCount": 65
+        },
+        {
+            "title": "Men's Chinos Pants",
+            "shortDescription": "Regular fit, multiple colors.",
+            "description": "Everyday trousers.",
+            "price": 49.9,
+            "currency": "USD",
+            "sku": "M-CHINO-REG",
+            "stockQty": 100,
+            "categories": [
+                "Men's Clothing",
+                "Fashion"
+            ],
+            "brand": "UrbanWear",
+            "tags": [
+                "men",
+                "pants"
+            ],
+            "variants": [
+                {
+                    "sku": "M-CHINO-NVY-32",
+                    "options": {
+                        "color": "Navy",
+                        "waist": "32"
+                    },
+                    "price": 49.9,
+                    "stockQty": 35
+                },
+                {
+                    "sku": "M-CHINO-BEI-34",
+                    "options": {
+                        "color": "Beige",
+                        "waist": "34"
+                    },
+                    "price": 49.9,
+                    "stockQty": 30
+                }
+            ],
+            "rating": 4.3,
+            "reviewCount": 41
+        },
+        {
+            "title": "Men's Hoodie",
+            "shortDescription": "Fleece, comfy.",
+            "description": "Casual wear.",
+            "price": 59.9,
+            "currency": "USD",
+            "sku": "M-HOODIE",
+            "stockQty": 120,
+            "categories": [
+                "Men's Clothing",
+                "Fashion"
+            ],
+            "brand": "UrbanWear",
+            "tags": [
+                "hoodie"
+            ],
+            "variants": [
+                {
+                    "sku": "M-HOODIE-GRY-M",
+                    "options": {
+                        "color": "Gray",
+                        "size": "M"
+                    },
+                    "price": 59.9,
+                    "stockQty": 40
+                },
+                {
+                    "sku": "M-HOODIE-GRY-L",
+                    "options": {
+                        "color": "Gray",
+                        "size": "L"
+                    },
+                    "price": 59.9,
+                    "stockQty": 40
+                }
+            ],
+            "rating": 4.5,
+            "reviewCount": 77
+        },
+        {
+            "title": "Women's Summer Dress",
+            "shortDescription": "Floral, light fabric.",
+            "description": "Great for warm days.",
+            "price": 54.9,
+            "currency": "USD",
+            "sku": "W-DRESS-SUM",
+            "stockQty": 90,
+            "categories": [
+                "Women's Clothing",
+                "Fashion"
+            ],
+            "brand": "Style&Co",
+            "tags": [
+                "women",
+                "dress",
+                "summer"
+            ],
+            "variants": [
+                {
+                    "sku": "W-DRESS-FLR-S",
+                    "options": {
+                        "pattern": "Floral",
+                        "size": "S"
+                    },
+                    "price": 54.9,
+                    "stockQty": 20
+                },
+                {
+                    "sku": "W-DRESS-FLR-M",
+                    "options": {
+                        "pattern": "Floral",
+                        "size": "M"
+                    },
+                    "price": 54.9,
+                    "stockQty": 35
+                }
+            ],
+            "rating": 4.6,
+            "reviewCount": 138,
+            "isNew": true
+        },
+        {
+            "title": "Women's Sports Leggings",
+            "shortDescription": "High waist, stretch.",
+            "description": "Gym and yoga.",
+            "price": 29.9,
+            "currency": "USD",
+            "sku": "W-LEGGING-SP",
+            "stockQty": 140,
+            "categories": [
+                "Women's Clothing",
+                "Fashion"
+            ],
+            "brand": "FitStyle",
+            "tags": [
+                "women",
+                "sport"
+            ],
+            "variants": [
+                {
+                    "sku": "W-LEG-BLK-S",
+                    "options": {
+                        "color": "Black",
+                        "size": "S"
+                    },
+                    "price": 29.9,
+                    "stockQty": 40
+                },
+                {
+                    "sku": "W-LEG-BLK-M",
+                    "options": {
+                        "color": "Black",
+                        "size": "M"
+                    },
+                    "price": 29.9,
+                    "stockQty": 60
+                }
+            ],
+            "rating": 4.5,
+            "reviewCount": 112
+        },
+        {
+            "title": "Women's Blouse",
+            "shortDescription": "Airy fabric.",
+            "description": "Office to casual.",
+            "price": 34.9,
+            "currency": "USD",
+            "sku": "W-BLOUSE-AIR",
+            "stockQty": 110,
+            "categories": [
+                "Women's Clothing",
+                "Fashion"
+            ],
+            "brand": "Style&Co",
+            "tags": [
+                "women",
+                "blouse"
+            ],
+            "rating": 4.3,
+            "reviewCount": 33
+        }
+    ]
+}

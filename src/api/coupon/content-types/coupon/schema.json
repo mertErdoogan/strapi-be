@@ -1,0 +1,20 @@
+{
+    "kind": "collectionType",
+    "collectionName": "coupons",
+    "info": { "singularName": "coupon", "pluralName": "coupons", "displayName": "Coupon" },
+    "options": { "draftAndPublish": false },
+    "attributes": {
+      "code": { "type": "string", "required": true, "unique": true },
+      "discount": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::discount.discount",
+        "required": true
+      },
+      "maxUse": { "type": "integer" },
+      "perUserLimit": { "type": "integer" },
+      "expiresAt": { "type": "datetime" },
+      "isActive": { "type": "boolean", "default": true }
+    }
+  }
+  

@@ -1,38 +1,32 @@
 {
-  "collectionName": "components_product_variants",
-  "info": {
-    "displayName": "Variant",
-    "description": "Product variants (color, size, etc.)"
-  },
-  "options": {},
-  "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
+    "collectionName": "components_product_variant",
+    "info": {
+        "displayName": "Variant"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": ["color", "size", "material", "style"],
-      "required": true
-    },
-    "value": {
-      "type": "string",
-      "required": true
-    },
-    "colorCode": {
-      "type": "string"
-    },
-    "priceModifier": {
-      "type": "decimal",
-      "default": 0
-    },
-    "stockModifier": {
-      "type": "integer",
-      "default": 0
-    },
-    "isAvailable": {
-      "type": "boolean",
-      "default": true
+    "attributes": {
+        "sku": {
+            "type": "string"
+        },
+        "barcode": {
+            "type": "string"
+        },
+        "options": {
+            "type": "json"
+        },
+        "price": {
+            "type": "decimal",
+            "required": true
+        },
+        "salePrice": {
+            "type": "decimal"
+        },
+        "stockQty": {
+            "type": "integer",
+            "default": 0
+        },
+        "manageStock": {
+            "type": "boolean",
+            "default": true
+        }
     }
-  }
 }

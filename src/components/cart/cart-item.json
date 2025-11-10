@@ -1,0 +1,13 @@
+{
+    "collectionName": "components_cart_cart_item",
+    "info": { "displayName": "Cart Item" },
+    "attributes": {
+      "productId": { "type": "integer", "required": true },
+      "sku": { "type": "string" },
+      "variantOptions": { "type": "json" },
+      "qty": { "type": "integer", "default": 1 },
+      "unitPrice": { "type": "decimal", "required": true },
+      "lineTotal": { "type": "decimal", "required": true }
+    }
+  }
+  

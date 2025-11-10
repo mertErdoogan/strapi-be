@@ -1,0 +1,15 @@
+{
+    "collectionName": "components_common_address",
+    "info": { "displayName": "Address" },
+    "attributes": {
+      "fullName": { "type": "string", "required": true },
+      "line1": { "type": "string", "required": true },
+      "line2": { "type": "string" },
+      "city": { "type": "string", "required": true },
+      "state": { "type": "string" },
+      "postalCode": { "type": "string" },
+      "country": { "type": "string", "required": true },
+      "phone": { "type": "string" }
+    }
+  }
+  
