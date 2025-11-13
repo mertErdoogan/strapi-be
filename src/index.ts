@@ -1,3 +1,4 @@
+// src/index.ts
 import type { Core } from '@strapi/strapi';
 import fs from 'fs';
 import path from 'path';
@@ -38,7 +39,7 @@ type ProductSeed = {
   stockQty?: number;
   manageStock?: boolean;
   stockStatus?: 'in_stock' | 'out_of_stock' | 'preorder';
-  categories?: string[];
+  categories?: string[]; // isim listesi (ör. ["Electronics"])
   brand?: string;
   tags?: any;
   attributes?: AttributeSeed[];
@@ -55,31 +56,69 @@ type ProductSeed = {
   reviewCount?: number;
 };
 
-const CATEGORY_CT = 'api::category.category' as any;
-const PRODUCT_CT = 'api::product.product' as any;
-const SHIPPING_ZONE_CT = 'api::shipping-zone.shipping-zone' as any;
-const SHIPPING_METHOD_CT = 'api::shipping-method.shipping-method' as any;
-const TAX_RULE_CT = 'api::tax-rule.tax-rule' as any;
-const DISCOUNT_CT = 'api::discount.discount' as any;
-const COUPON_CT = 'api::coupon.coupon' as any;
+// ---- Content-Type UID'leri
+const CATEGORY_CT = 'api::category.category' as const;
+const PRODUCT_CT = 'api::product.product' as const;
+const SHIPPING_ZONE_CT = 'api::shipping-zone.shipping-zone' as const;
+const SHIPPING_METHOD_CT = 'api::shipping-method.shipping-method' as const;
+const TAX_RULE_CT = 'api::tax-rule.tax-rule' as const;
+const DISCOUNT_CT = 'api::discount.discount' as const;
+const COUPON_CT = 'api::coupon.coupon' as const;
 
-const readJSON = <T>(...segments: string[]): T => {
-  const p = path.resolve(process.cwd(), 'src', ...segments);
+// ---- Data kök klasör (default: ./data)
+const DATA_ROOT = process.env.SEED_DATA_ROOT || "./src/data";
+
+// ---- JSON okuma helper
+function readJSON<T>(...segments: string[]): T {
+  const p = path.resolve(process.cwd(), DATA_ROOT, ...segments);
   const raw = fs.readFileSync(p, 'utf-8');
   return JSON.parse(raw) as T;
-};
+}
+
+// ---- Sayı parse helper
+const priceNum = (v?: number | string) =>
+  typeof v === 'string' ? parseFloat(v) : typeof v === 'number' ? v : undefined;
+
+// ---- Ürün modelinde kategori alanı ve ilişki türü tespiti
+function getProductCategoryFieldInfo(strapi: Core.Strapi) {
+  const model = strapi.contentType(PRODUCT_CT);
+  if (!model) return { field: null as string | null, relation: null as string | null };
+
+  // Önce "categories", yoksa "category"
+  let field: string | null = null;
+  if (model.attributes?.['categories']) field = 'categories';
+  else if (model.attributes?.['category']) field = 'category';
+
+  const relation = field ? (model.attributes[field] as any)?.relation : null; // manyToMany, manyToOne, oneToOne...
+  return { field, relation };
+}
 
 export default {
-  register() { },
+  register() {},
 
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    // Seed tetikleyici (ENV)
     if (process.env.SEED_CATEGORIES !== 'true') {
       strapi.log.info('Seed skipped. Set SEED_CATEGORIES=true to run.');
       return;
     }
 
-    // ---- 1) KATEGORİLER
-    const { categories } = readJSON<{ categories: CategorySeed[] }>('data', 'categories.json');
+    // Aynı makinede bir kez çalıştırma koruması (opsiyonel)
+    if (process.env.SEED_ONCE === 'true') {
+      const FLAG = 'seed:done:v1';
+      const store = strapi.store({ type: 'core', name: 'app' });
+      const done = await store.get({ key: FLAG });
+      if (done) {
+        strapi.log.info('Seed already done (core_store). Skipping.');
+        return;
+      }
+      // en sonda set edeceğiz
+    }
+
+    // =========================
+    // 1) KATEGORİLER
+    // =========================
+    const { categories } = readJSON<{ categories: CategorySeed[] }>('categories.json');
     const nameToId = new Map<string, number>();
 
     for (const c of categories) {
@@ -91,46 +130,82 @@ export default {
         isActive: c.isActive ?? true,
         seoTitle: c.seoTitle ?? c.name,
         seoDescription: c.seoDescription ?? (c.description ? String(c.description).slice(0, 160) : ''),
-        publishedAt: new Date().toISOString()
+        publishedAt: new Date().toISOString(),
       };
 
       const existing = await strapi.entityService.findMany(CATEGORY_CT, {
         filters: { name: c.name },
-        limit: 1
+        limit: 1,
       });
 
       let id: number;
       if (existing?.length) {
-        const updated = await strapi.entityService.update(CATEGORY_CT, existing[0].id, baseData as any);
+        const updated = await strapi.entityService.update(CATEGORY_CT, existing[0].id, { data: baseData });
         id = (updated as any).id as number;
       } else {
-        const created = await strapi.entityService.create(CATEGORY_CT, { data: baseData as any });
+        const created = await strapi.entityService.create(CATEGORY_CT, { data: baseData });
         id = (created as any).id as number;
       }
       nameToId.set(c.name, id);
     }
 
-    // parent ilişkileri
+    // parent ilişkileri (varsa)
     for (const c of categories) {
       if (!c.parent) continue;
       const childId = nameToId.get(c.name);
       const parentId = nameToId.get(c.parent);
       if (childId && parentId) {
-        await strapi.entityService.update(CATEGORY_CT, childId, { parent: parentId } as any);
+        // parent gerçekten var mı kontrol
+        const parentExists = await strapi.entityService.findOne(CATEGORY_CT, parentId, { fields: ['id'] });
+        if (parentExists) {
+          await strapi.entityService.update(CATEGORY_CT, childId, { data: { parent: parentId } });
+        } else {
+          strapi.log.warn(`Parent id ${parentId} bulunamadı, "${c.name}" için parent set edilmedi.`);
+        }
       }
     }
 
     strapi.log.info(`Seeded/updated ${categories.length} categories ✅`);
 
-    // ---- 2) ÜRÜNLER
-    const { products } = readJSON<{ products: ProductSeed[] }>('data', 'products.json');
+    // =========================
+    // 2) ÜRÜNLER
+    // =========================
+    const { products } = readJSON<{ products: ProductSeed[] }>('products.json');
 
-    const priceNum = (v?: number | string) =>
-      typeof v === 'string' ? parseFloat(v) : typeof v === 'number' ? v : undefined;
+    const { field: categoryFieldName, relation: categoryRelation } = getProductCategoryFieldInfo(strapi);
+    if (!categoryFieldName) {
+      strapi.log.warn('Product modelinde "categories" veya "category" alanı bulunamadı. Ürün-kategori ilişkileri set edilmeyecek.');
+    }
 
     for (const p of products) {
-      const categoryIds =
+      // Kategori isimlerinden id map'i
+      const rawCategoryIds =
         p.categories?.map((catName) => nameToId.get(catName)).filter((id): id is number => typeof id === 'number') ?? [];
+
+      // DB'de gerçekten var olan kategori id'lerini doğrula
+      let validCategoryIds: number[] = [];
+      if (rawCategoryIds.length) {
+        const existingCats = await strapi.entityService.findMany(CATEGORY_CT, {
+          filters: { id: { $in: rawCategoryIds } },
+          fields: ['id'],
+          limit: rawCategoryIds.length,
+        });
+        validCategoryIds = existingCats.map((x: any) => x.id);
+        if (validCategoryIds.length !== rawCategoryIds.length) {
+          const missing = rawCategoryIds.filter((id) => !validCategoryIds.includes(id));
+          strapi.log.warn(`Product "${p.title}": şu kategori id'leri yok sayıldı -> ${missing.join(', ')}`);
+        }
+      }
+
+      // m2m / m2o format hazırlığı
+      let categoriesData: any = undefined;
+      if (categoryFieldName) {
+        if ((categoryRelation || '').toLowerCase().includes('many')) {
+          categoriesData = validCategoryIds.length ? validCategoryIds : undefined; // manyToMany / oneToMany gibi
+        } else {
+          categoriesData = validCategoryIds[0] ?? undefined; // manyToOne / oneToOne gibi tek id
+        }
+      }
 
       // min/max price (ürün + varyantlar)
       const candidatePrices: number[] = [];
@@ -143,7 +218,8 @@ export default {
       const minPrice = candidatePrices.length ? Math.min(...candidatePrices) : priceNum(p.price);
       const maxPrice = candidatePrices.length ? Math.max(...candidatePrices) : priceNum(p.price);
 
-      const baseData = {
+      // Ürün base alanları (modelinde olmayan alanları eklediysen burada çıkarmalısın)
+      const baseData: any = {
         title: p.title,
         slug: slugify(p.title, { lower: true, strict: true }),
         shortDescription: p.shortDescription ?? '',
@@ -160,8 +236,8 @@ export default {
         tags: p.tags ?? [],
         attributes: (p.attributes ?? []) as any,
         variants: (p.variants ?? []) as any,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
+        minPrice,
+        maxPrice,
         isFeatured: p.isFeatured ?? false,
         isNew: p.isNew ?? false,
         rating: p.rating ?? 4.6,
@@ -173,33 +249,39 @@ export default {
         seoTitle: p.seoTitle ?? p.title,
         seoDescription: p.seoDescription ?? (p.shortDescription ? p.shortDescription.slice(0, 160) : ''),
         publishedAt: new Date().toISOString(),
-        categories: categoryIds.length ? categoryIds : undefined
       };
 
-      // upsert by SKU (varsa) yoksa title
+      // upsert kriteri: SKU varsa SKU, yoksa title
       const filters: any = p.sku ? { sku: p.sku } : { title: p.title };
       const existingProd = await strapi.entityService.findMany(PRODUCT_CT, { filters, limit: 1 });
 
+      const dataForWrite: any = { ...baseData };
+      if (categoryFieldName && categoriesData !== undefined) {
+        dataForWrite[categoryFieldName] = categoriesData;
+      }
+
       if (existingProd?.length) {
-        await strapi.entityService.update(PRODUCT_CT, existingProd[0].id, { ...baseData, categories: categoryIds } as any);
+        await strapi.entityService.update(PRODUCT_CT, existingProd[0].id, { data: dataForWrite });
       } else {
-        await strapi.entityService.create(PRODUCT_CT, { data: { ...baseData, categories: categoryIds } as any });
+        await strapi.entityService.create(PRODUCT_CT, { data: dataForWrite });
       }
     }
 
     strapi.log.info(`Seeded/updated ${products.length} products ✅`);
 
-    // ---- 3) SHIPPING seed
-    const { zones, methods } = readJSON<{ zones: any[]; methods: any[] }>('data', 'shipping.json');
+    // =========================
+    // 3) SHIPPING
+    // =========================
+    const { zones, methods } = readJSON<{ zones: any[]; methods: any[] }>('shipping.json');
     const zoneNameToId = new Map<string, number>();
 
     for (const z of zones) {
       const exists = await strapi.entityService.findMany(SHIPPING_ZONE_CT, { filters: { name: z.name }, limit: 1 });
       let id: number;
       if (exists?.length) {
-        id = (await strapi.entityService.update(SHIPPING_ZONE_CT, exists[0].id, z as any))!.id as any;
+        id = (await strapi.entityService.update(SHIPPING_ZONE_CT, exists[0].id, { data: z }))!.id as any;
       } else {
-        id = (await strapi.entityService.create(SHIPPING_ZONE_CT, { data: z as any }))!.id as any;
+        id = (await strapi.entityService.create(SHIPPING_ZONE_CT, { data: z }))!.id as any;
       }
       zoneNameToId.set(z.name, id);
     }
@@ -208,36 +290,40 @@ export default {
       const data = { ...m, zone: zoneNameToId.get(m.zone) };
       const exists = await strapi.entityService.findMany(SHIPPING_METHOD_CT, { filters: { name: m.name }, limit: 1 });
       if (exists?.length) {
-        await strapi.entityService.update(SHIPPING_METHOD_CT, exists[0].id, data as any);
+        await strapi.entityService.update(SHIPPING_METHOD_CT, exists[0].id, { data });
       } else {
-        await strapi.entityService.create(SHIPPING_METHOD_CT, { data: data as any });
+        await strapi.entityService.create(SHIPPING_METHOD_CT, { data });
       }
     }
     strapi.log.info(`Seeded shipping zones (${zones.length}) & methods (${methods.length}) ✅`);
 
-    // ---- 4) TAX seed
-    const { rules } = readJSON<{ rules: any[] }>('data', 'taxes.json');
+    // =========================
+    // 4) TAX
+    // =========================
+    const { rules } = readJSON<{ rules: any[] }>('taxes.json');
     for (const r of rules) {
       const exists = await strapi.entityService.findMany(TAX_RULE_CT, { filters: { name: r.name }, limit: 1 });
       if (exists?.length) {
-        await strapi.entityService.update(TAX_RULE_CT, exists[0].id, r as any);
+        await strapi.entityService.update(TAX_RULE_CT, exists[0].id, { data: r });
       } else {
-        await strapi.entityService.create(TAX_RULE_CT, { data: r as any });
+        await strapi.entityService.create(TAX_RULE_CT, { data: r });
       }
     }
     strapi.log.info(`Seeded tax rules (${rules.length}) ✅`);
 
-    // ---- 5) DISCOUNT & COUPON seed
-    const { discounts, coupons } = readJSON<{ discounts: any[]; coupons: any[] }>('data', 'discounts.json');
+    // =========================
+    // 5) DISCOUNT & COUPON
+    // =========================
+    const { discounts, coupons } = readJSON<{ discounts: any[]; coupons: any[] }>('discounts.json');
     const discNameToId = new Map<string, number>();
 
     for (const d of discounts) {
       const exists = await strapi.entityService.findMany(DISCOUNT_CT, { filters: { name: d.name }, limit: 1 });
       let id: number;
       if (exists?.length) {
-        id = (await strapi.entityService.update(DISCOUNT_CT, exists[0].id, d as any))!.id as any;
+        id = (await strapi.entityService.update(DISCOUNT_CT, exists[0].id, { data: d }))!.id as any;
       } else {
-        id = (await strapi.entityService.create(DISCOUNT_CT, { data: d as any }))!.id as any;
+        id = (await strapi.entityService.create(DISCOUNT_CT, { data: d }))!.id as any;
       }
       discNameToId.set(d.name, id);
     }
@@ -246,11 +332,19 @@ export default {
       const data = { ...c, discount: discNameToId.get(c.discount) };
       const exists = await strapi.entityService.findMany(COUPON_CT, { filters: { code: c.code }, limit: 1 });
       if (exists?.length) {
-        await strapi.entityService.update(COUPON_CT, exists[0].id, data as any);
+        await strapi.entityService.update(COUPON_CT, exists[0].id, { data });
       } else {
-        await strapi.entityService.create(COUPON_CT, { data: data as any });
+        await strapi.entityService.create(COUPON_CT, { data });
       }
     }
     strapi.log.info(`Seeded discounts (${discounts.length}) & coupons (${coupons.length}) ✅`);
-  }
+
+    // ---- Tek sefer koruma flag'ini yaz
+    if (process.env.SEED_ONCE === 'true') {
+      const store = strapi.store({ type: 'core', name: 'app' });
+      await store.set({ key: 'seed:done:v1', value: true });
+    }
+
+    strapi.log.info('✅ Seed tamamlandı.');
+  },
 };
